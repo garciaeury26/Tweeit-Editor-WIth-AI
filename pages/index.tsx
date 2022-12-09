@@ -2,6 +2,7 @@ import { Box, Button, Paper, Text, Textarea, Title } from "@mantine/core";
 import type { NextPage } from "next";
 import { useRef, useState } from "react";
 import CustomizedCopyButton from "../components/CustomizedCopyButton";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
   const formRef = useRef(null);
@@ -74,79 +75,83 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Box
-      w="100%"
-      h="100%"
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Box w={600}>
-        <Title order={1} mb={30}>
-          Tweet Editor with AI
-        </Title>
-        <Textarea
-          ref={formRef}
-          placeholder="Your comment"
-          label="Your tweet"
-          radius="md"
-          size="md"
-          withAsterisk
-          onChange={(e) => {
-            setUserInput(e.target.value);
-          }}
-          minRows={10}
-        />
-        <Box mt={20} sx={{ display: "flex", gap: 10 }}>
-          <Button
-            color="yellow"
-            radius="xl"
+    <>
+      <Box
+        w="100%"
+        h="100%"
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box w={600}>
+          <Title order={1} mb={30}>
+            Tweet Editor with AI
+          </Title>
+          <Textarea
+            ref={formRef}
+            placeholder="Your comment"
+            label="Your tweet"
+            radius="md"
             size="md"
-            onClick={paraphrase}
-            loading={isParaphrazing}
-          >
-            Paraphrase
-          </Button>
-          <Button
-            color="violet"
-            radius="xl"
-            size="md"
-            onClick={summarize}
-            loading={isSummarizing}
-          >
-            Summarize
-          </Button>
-          <Button
-            color="lime"
-            radius="xl"
-            size="md"
-            onClick={createStory}
-            loading={isCreatingStory}
-          >
-            Create a story
-          </Button>
-        </Box>
-        {result && (
-          <Box mt={20}>
-            <Box ta="right">
-              <CustomizedCopyButton value={result} />
-            </Box>
-            <Paper
-              sx={(theme) => ({ backgroundColor: theme.black })}
-              mt={5}
-              shadow="md"
-              radius="md"
-              p="lg"
+            withAsterisk
+            onChange={(e) => {
+              setUserInput(e.target.value);
+            }}
+            minRows={10}
+          />
+          <Box mt={20} sx={{ display: "flex", gap: 10 }}>
+            <Button
+              color="yellow"
+              radius="xl"
+              size="md"
+              onClick={paraphrase}
+              loading={isParaphrazing}
             >
-              <Text>{result}</Text>
-            </Paper>
+              Paraphrase
+            </Button>
+            <Button
+              color="violet"
+              radius="xl"
+              size="md"
+              onClick={summarize}
+              loading={isSummarizing}
+            >
+              Summarize
+            </Button>
+            <Button
+              color="lime"
+              radius="xl"
+              size="md"
+              onClick={createStory}
+              loading={isCreatingStory}
+            >
+              Create a story
+            </Button>
           </Box>
-        )}
+          {result && (
+            <Box mt={20}>
+              <Box ta="right">
+                <CustomizedCopyButton value={result} />
+              </Box>
+              <Paper
+                sx={(theme) => ({ backgroundColor: theme.black })}
+                mt={5}
+                shadow="md"
+                radius="md"
+                p="lg"
+              >
+                <Text>{result}</Text>
+              </Paper>
+            </Box>
+          )}
+        </Box>
       </Box>
-    </Box>
+
+      <Footer />
+    </>
   );
 };
 
